@@ -7,7 +7,7 @@ export type taskProps={
 
 }
 
-export default function Task({index,task}:taskProps){
+export default function Task({task}:taskProps){
     return(
         <Box
         borderRadius={5}

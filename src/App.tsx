@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import BodyComponent from "./components/BodyComponent";
-import ContextProvider, { LocalContext } from "./LocalContext";
+import  { LocalContext } from "./LocalContext";
 import AddTask from "./components/AddTask";
 
 function App() {

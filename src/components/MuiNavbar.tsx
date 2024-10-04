@@ -2,23 +2,17 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Autocomplete,
-  TextField,
   Button,
   Avatar,
   Grid2,
   Typography,
-  Box,
   Menu,
   MenuItem,
-  Tooltip,
-  Container,
 } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LocalContext } from "../LocalContext";
-import { StarBorderOutlined } from "@mui/icons-material";
 
 export default function MuiNavBar() {
   const navigate = useNavigate();

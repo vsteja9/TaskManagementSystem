@@ -8,9 +8,9 @@ interface states {
 }
 export const LocalContext = createContext<states>({
   isAddTaskOpened: false,
-  setIsAddTaskOpened: function (val: boolean): void {},
+  setIsAddTaskOpened: function (): void {},
   isBoardOpened: false,
-  setIsBoardOpened: function (val: boolean): void {},
+  setIsBoardOpened: function (): void {},
 });
 
 export default function ContextProvider({ children }: any) {

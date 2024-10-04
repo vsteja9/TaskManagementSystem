@@ -7,8 +7,6 @@ import Register from "./components/Register.tsx";
 import ScrumBoard from "./components/ScrumBoard.tsx";
 import AnalyticsPage from "./components/AnalyticsPage.tsx";
 import AddTask from "./components/AddTask.tsx";
-import ManageAccess from "./components/ManageAccess.tsx";
-import BackLog from "./components/LogOut.tsx";
 import Layout from "./Layout.tsx";
 import ContextProvider from "./LocalContext.tsx";
 import LogOut from "./components/LogOut.tsx";
@@ -23,7 +21,6 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/mainpage" element={<Layout />}>
           <Route index element={<App />}></Route>
           <Route path="addtask" element={<AddTask />}></Route>
-          <Route path="manageaccess" element={<ManageAccess />}></Route>
         </Route>
         <Route path="/scrum" element={<ScrumBoard />}></Route>
 

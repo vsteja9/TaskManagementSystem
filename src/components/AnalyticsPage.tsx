@@ -1,5 +1,4 @@
 import { Grid2 } from "@mui/material";
-import { blueGrey } from "@mui/material/colors";
 import { BarChart, LineChart, PieChart } from "@mui/x-charts";
 
 export default function AnalyticsPage() {

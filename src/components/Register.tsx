@@ -148,7 +148,10 @@ export default function Register() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                    console.log("lastname", lastName);
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -204,7 +207,7 @@ export default function Register() {
               </Grid>
             </Grid>
           </Box>
-          <CssBaseline/>
+          <CssBaseline />
           <SignInWithGoogle />
         </Box>
         <Copyright sx={{ mt: 5 }} />
