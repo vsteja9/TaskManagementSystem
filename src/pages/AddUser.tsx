@@ -11,7 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { UserRoles } from "../Utils/Responses";
 import { useRegisterMutation } from "../requests/mutations";
 import Loader from "./Loader";
@@ -118,8 +118,8 @@ export default function AddUser() {
                 );
               }}
               options={[
-                { label: "User", id: 1 },
-                { label: "Admin", id: 2 },
+                { label: "user", id: 1 },
+                { label: "admin", id: 2 },
               ]}
             ></Autocomplete>
             <TextField

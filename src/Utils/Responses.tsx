@@ -1,6 +1,6 @@
 export enum UserRoles {
-  admin = "ADMIN",
-  user = "USER",
+  admin = "admin",
+  user = "user",
 }
 export type registerUserResponse = {
   id: string;
