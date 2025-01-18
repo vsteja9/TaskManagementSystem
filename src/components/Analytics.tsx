@@ -1,18 +1,38 @@
 import { Grid2 } from "@mui/material";
 import { BarChart, LineChart, PieChart } from "@mui/x-charts";
+import { useGetTasksForProject } from "../requests/queries";
+import { useCallback, useContext, useMemo, useState } from "react";
+import { LocalContext } from "../LocalContext";
+import { taskRes } from "../Utils/Responses";
+import Loader from "../pages/Loader";
 
 export default function AnalyticsPage() {
-  const localStorageData = localStorage.getItem("kanban-board");
-  let calculatedData: number[] = [];
-  if (localStorageData) {
-    const parsedData = JSON.parse(localStorageData);
-    calculatedData = [
-      parsedData["Analysis"].items?.length,
-      parsedData["InDev"].items?.length,
-      parsedData["InQA"].items?.length,
-      parsedData["Done"].items?.length,
-    ];
-  }
+  const { selectedProject } = useContext(LocalContext);
+  const { data, isLoading } = useGetTasksForProject(selectedProject);
+  let calculatedData = [0, 0, 0, 0];
+  const handleTaskAddition = () => {
+    console.log(calculatedData);
+    data.map((task: taskRes) => {
+      switch (task.status) {
+        case "Analysis":
+         
+          calculatedData[0]++;
+          break;
+        case "Dev":
+          calculatedData[1]++;
+          break;
+        case "qa":
+          calculatedData[2]++;
+          break;
+        case "Done":
+          calculatedData[3]++;
+          break;
+      }
+      console.log(calculatedData);
+    });
+  };
+
+  handleTaskAddition();
 
   const projectAnalytics: any = [
     [
@@ -24,6 +44,7 @@ export default function AnalyticsPage() {
   ];
   return (
     <>
+      {isLoading && <Loader />}
       <Grid2
         display={"flex"}
         alignContent={"center"}

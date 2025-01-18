@@ -7,71 +7,61 @@ import {
   Grid,
   TextField,
   Button,
-  Alert,
-  Snackbar,
 } from "@mui/material";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "./Firebase";
 import { LocalContext } from "../LocalContext";
-import SignInWithGoogle from "./SignInWithGoogle";
+import { CustomSnackBar } from "./Register";
+import { generateToken } from "../requests";
+import { STATUS_CODES } from "http";
+import { HttpStatusCode } from "axios";
+import { useGenerateToken } from "../requests/mutations";
+import Loader from "../pages/Loader";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const { setIsBoardOpened } = useContext(LocalContext);
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
-  const [successSnackBar, setSuccessSnackBar] = useState<boolean>(false);
-  const [failedSnackBar, setFailedSnackBar] = useState<boolean>(false);
+  const { snackBarMessage, setSnackBarMessage, snackBar, setSnackBar } =
+    useContext(LocalContext);
+  const { mutate, isPending, isSuccess, isError } = useGenerateToken();
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     try {
       e.preventDefault();
-      console.log('values',email,password)
-      await signInWithEmailAndPassword(auth, email, password);
-      setSuccessSnackBar(true);
-      setIsBoardOpened(true);
-    } catch (err) {
-      console.log(err);
-      setFailedSnackBar(true);
+      const token = await mutate({ email, password });
+      localStorage.setItem("JWTtoken", JSON.stringify(token));
+      localStorage.setItem(
+        "userCred",
+        JSON.stringify({
+          email: email,
+          password: password,
+        })
+      );
+      // setIsBoardOpened(true);
+    } catch (err: any) {
+      console.log("err value", err.status);
+      if (err.status === HttpStatusCode.Unauthorized) {
+        setSnackBarMessage("Unauthorised Login password.Please try Again.");
+      } else {
+        setSnackBarMessage("User Login Failed.Please try Again.");
+      }
+      throw err;
+    } finally {
+      setSnackBar(true);
     }
   }
+  if (isPending && !isError && !isSuccess) return <Loader />;
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Snackbar
-        open={successSnackBar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        autoHideDuration={6000}
-        onClose={() => setSuccessSnackBar(false)}
-      >
-        <Alert
-          onClose={() => {
-            setSuccessSnackBar(false);
-            navigate("/mainpage");
-          }}
-          severity="success"
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          User Login Successful.
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={failedSnackBar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        autoHideDuration={6000}
-        onClose={() => setFailedSnackBar(false)}
-      >
-        <Alert
-          onClose={() => setFailedSnackBar(false)}
-          severity="error"
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          Sorry,User Login Failed.
-        </Alert>
-      </Snackbar>
+      <CustomSnackBar
+        message={snackBarMessage}
+        snackBar={snackBar}
+        setSnackBar={setSnackBar}
+      />
       <Box
         sx={{
           marginTop: 8,
@@ -121,7 +111,6 @@ export default function Login() {
         </Box>
         <Link to={"/"}>register</Link>
       </Box>
-        <SignInWithGoogle />
     </Container>
   );
 }

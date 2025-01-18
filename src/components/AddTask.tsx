@@ -20,7 +20,7 @@ interface IAddTask {
   status: string;
 }
 
-export default function AddTask() {
+export default function AddTaskToBoard() {
   const [showSnackBar, setShowSnackBar] = useState(false);
   // if we want to use the 3rd party libraries like mui, we need to use controller..
   const { control, register } = useForm<IAddTask>({
