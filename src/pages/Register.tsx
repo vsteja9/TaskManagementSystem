@@ -176,7 +176,7 @@ export default function Register() {
           }}
         >
           <Typography component="h1" variant="h5">
-            😊 Welcome Buddy 😊
+            Welcome 
           </Typography>
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
