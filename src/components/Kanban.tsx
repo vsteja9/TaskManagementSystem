@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useMemo,
-  useCallback,
-} from "react";
+import { useState, useEffect, useContext } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
   Box,
@@ -15,20 +9,9 @@ import {
   IconButton,
   Input,
   Avatar,
-  Icon,
-  List,
-  Color,
   Tooltip,
 } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CancelIcon from "@mui/icons-material/Cancel";
-import AddUser from "../pages/AddUser";
-import AddProject from "../pages/AddProject";
-import Loader from "../pages/Loader";
 import { LocalContext } from "../LocalContext";
-import AddTask from "./AddTask";
-import AddTaskDialog from "../pages/AddTask";
 import { useGetTasksForProject } from "../requests/queries";
 import { EditTask } from "../pages/EditTask";
 import {
@@ -37,14 +20,8 @@ import {
   taskRes,
   usersRes,
 } from "../Utils/Responses";
-import { AnyCnameRecord } from "dns";
-import Task from "./Task";
 import { useDeleteTask, useUpdateTask } from "../requests/mutations";
-
-// Utility function for local storage
-const saveToLocalStorage = (data: any) => {
-  localStorage.setItem("kanban-board", JSON.stringify(data));
-};
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const randomColor = () => {
   const letters = "0123456789ABCDEF";
@@ -55,10 +32,6 @@ const randomColor = () => {
   return color;
 };
 
-const randomAlphabet = () => {
-  const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  return alphabets[Math.floor(Math.random() * alphabets.length)];
-};
 
 type columnType = {
   name: string;
@@ -202,30 +175,13 @@ const Board = ({
 }) => {
   const { selectedProject, setEditTask } = useContext(LocalContext);
 
-  const { data, error, isLoading, refetch } =
+  const { data, error, isLoading} =
     useGetTasksForProject(selectedProject);
   const { mutate } = useUpdateTask();
   const { mutate: deleteMutation } = useDeleteTask();
   const [taskSelect, setTaskSelect] = useState({} as taskType);
   // if (isLoading && !data && !error) return <Loader />;
-  const newColumns: AllcolumnsType = {
-    Analysis: {
-      name: "Analysis",
-      items: [],
-    },
-    Dev: {
-      name: "In Dev",
-      items: [],
-    },
-    qa: {
-      name: "In QA",
-      items: [],
-    },
-    Done: {
-      name: "Done",
-      items: [],
-    },
-  };
+  
   // const initialTasksColumns = useCallback(() => {
   //   data?.map((task: taskRes) => {
   //     console.log("the task");
@@ -352,9 +308,9 @@ const Board = ({
       });
     }
   };
-  const { openAddTask, setOpenAddTask } = useContext(LocalContext);
+  const {  setOpenAddTask } = useContext(LocalContext);
   // Add a new task to a specific column
-  const addTask = (columnId: string) => {
+  const addTask = () => {
     setOpenAddTask(true);
     // const newTaskId = Date.now().toString();
 
@@ -377,9 +333,7 @@ const Board = ({
   };
 
   // Delete a task from a specific column
-  const deleteTask = async (columnId: string, taskId: string) => {
-    const column = columns[columnId as keyof AllcolumnsType];
-    const updatedItems = column.items.filter((item: any) => item.id !== taskId);
+  const deleteTask = async ( taskId: string) => {
     await deleteMutation(taskId);
     console.log("the delete task", taskId);
     // setColumns({
@@ -445,7 +399,7 @@ const Board = ({
                   <Button
                     variant="outlined"
                     size="small"
-                    onClick={() => addTask(columnId)}
+                    onClick={() => addTask()}
                     sx={{ marginBottom: 2, width: "20%" }}
                   >
                     +
@@ -470,7 +424,7 @@ const Board = ({
                         >
                           <CardContent sx={{ display: "flex" }}>
                             <Box
-                              onClick={(e: any) => {
+                              onClick={() => {
                                 setEditTask(true);
                                 setTaskSelect(item);
                               }}
@@ -520,7 +474,7 @@ const Board = ({
                                 <DeleteIcon
                                   aria-label="delete"
                                   fontSize="small"
-                                  onClick={() => deleteTask(columnId, item.id)}
+                                  onClick={() => deleteTask( item.id)}
                                 />
                               </IconButton>
                               <Tooltip title={item.username} arrow>

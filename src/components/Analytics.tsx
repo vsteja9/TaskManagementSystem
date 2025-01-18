@@ -1,7 +1,7 @@
 import { Grid2 } from "@mui/material";
 import { BarChart, LineChart, PieChart } from "@mui/x-charts";
 import { useGetTasksForProject } from "../requests/queries";
-import { useCallback, useContext, useMemo, useState } from "react";
+import {  useContext} from "react";
 import { LocalContext } from "../LocalContext";
 import { taskRes } from "../Utils/Responses";
 import Loader from "../pages/Loader";

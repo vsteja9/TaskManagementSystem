@@ -1,13 +1,11 @@
-import { useContext } from "react";
 import BodyComponent from "./components/BodyComponent";
-import { LocalContext } from "./LocalContext";
 import UsersList from "./pages/UsersList";
 import AddTask from "@mui/icons-material/AddTask";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AnalyticsPage from "./components/Analytics";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import LogOut from "./components/LogOut";
-import Register from "./components/Register";
+import Register from "./pages/Register";
 import ScrumBoard from "./components/ScrumBoard";
 import Layout from "./Layout";
 import Loader from "./pages/Loader";

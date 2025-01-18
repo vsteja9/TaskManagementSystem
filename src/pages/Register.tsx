@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,11 +12,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as yup from "yup";
 import { Snackbar, Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { LocalContext } from "../LocalContext";
-import SignInWithGoogle from "./SignInWithGoogle";
-import { Controller, Form, FormProvider, useForm } from "react-hook-form";
-import { error } from "console";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup/src/yup.js";
 import { useRegisterMutation } from "../requests/mutations";
 import { registerUserReq } from "../Utils/RequestsDtos";

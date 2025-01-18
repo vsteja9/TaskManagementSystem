@@ -1,9 +1,6 @@
-import { Box, CircularProgress,  Typography } from "@mui/material";
-import { useContext } from "react";
-import { LocalContext } from "../LocalContext";
+import { Box, CircularProgress,  Typography } from "@mui/material"; 
 
 export default function Loader() {
-  const { openProjectDialog } = useContext(LocalContext);
   return (
     <Box
       sx={{

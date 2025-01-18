@@ -5,39 +5,19 @@ import {
   DialogActions,
   DialogContent,
   Divider,
-  Input,
   TextField,
   Typography,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { LocalContext } from "../LocalContext";
-import {
-  Controller,
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldValues,
-  Form,
-  SubmitHandler,
-  useForm,
-  UseFormStateReturn,
-} from "react-hook-form";
 import { useAddProject } from "../requests/mutations";
 import { projectReq } from "../Utils/RequestsDtos";
-import { CustomSnackBar } from "../components/Register";
-import { isDataView } from "util/types";
 import Loader from "./Loader";
 
-type projectdet = {
-  name: string;
-  description: string;
-};
 export default function AddProject() {
   const {
     openProjectDialog,
     setOpenProjectDialog,
-    snackBar,
-    setSnackBar,
-    snackBarMessage,
   } = useContext(LocalContext);
   const [projectName, setProjectName] = useState("");
   const [projectDesp, setProjectDesp] = useState("");

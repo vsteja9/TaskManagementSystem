@@ -1,5 +1,3 @@
-import { columnType } from "./Enums";
-
 export enum UserRoles {
   admin = "ADMIN",
   user = "USER",

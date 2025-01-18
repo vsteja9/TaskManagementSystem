@@ -65,7 +65,7 @@ export function useAddTask(): UseMutationResult<
   const { selectedProject } = useContext(LocalContext);
   return useMutation({
     mutationFn: (task) => AddTask(task),
-    onSuccess: (data) => {
+    onSuccess: () => {
       // take the project id from data and invalidate the gettasks query...
       setSnackBar(true), setSnackBarMessage("Successfully added the task");
       queryClient.invalidateQueries({

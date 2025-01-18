@@ -1,5 +1,5 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useState } from "react";
 import AnalyticsPage from "./Analytics";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
@@ -8,7 +8,7 @@ import AddProject from "../pages/AddProject";
 import AddUser from "../pages/AddUser";
 import { LocalContext } from "../LocalContext";
 import AddTaskDialog from "../pages/AddTask";
-import { CustomSnackBar } from "./Register";
+import { CustomSnackBar } from "../pages/Register";
 
 export default function BodyComponent({ Projects, Users }: any) {
   const [value, setvalue] = useState(0);

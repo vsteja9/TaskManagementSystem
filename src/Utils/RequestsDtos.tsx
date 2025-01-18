@@ -1,4 +1,3 @@
-import { taskType } from "../components/Kanban";
 import { dbtaskStatus, UserRoles } from "./Responses";
 
 export type registerUserReq = {

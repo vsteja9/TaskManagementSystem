@@ -3,7 +3,6 @@ import { LocalContext } from "../LocalContext";
 import {
   Autocomplete,
   AutocompleteRenderInputParams,
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -12,12 +11,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Form, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { UserRoles } from "../Utils/Responses";
 import { useRegisterMutation } from "../requests/mutations";
 import Loader from "./Loader";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 export type userObjectType = {
   name: string;
@@ -27,27 +24,27 @@ export type userObjectType = {
   confirmPassword: string;
 };
 export default function AddUser() {
-  const validationSchema = yup.object().shape({
-    name: yup.string().required(),
-    role: yup.string().oneOf(Object.values(UserRoles)).required(),
-    email: yup.string().required().email("Must be a email"),
-    password: yup
-      .string()
-      .required("password is required")
-      .min(8, "min 8 characters are required")
-      .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
-      .matches(/^(?=.*[A-Z])/, "Must contain at least one uppercase character")
-      .matches(/^(?=.*[0-9])/, "Must contain at least one number")
-      .matches(/^(?=.*[!@#%&])/, "Must contain at least one special character"),
-    confirmPassword: yup
-      .string()
-      .required("confirm password is required")
-      .oneOf([yup.ref("password")], "password must match")
-      .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
-      .matches(/^(?=.*[A-Z])/, "Must contain at least one uppercase character")
-      .matches(/^(?=.*[0-9])/, "Must contain at least one number")
-      .matches(/^(?=.*[!@#%&])/, "Must contain at least one special character"),
-  });
+  // const validationSchema = yup.object().shape({
+  //   name: yup.string().required(),
+  //   role: yup.string().oneOf(Object.values(UserRoles)).required(),
+  //   email: yup.string().required().email("Must be a email"),
+  //   password: yup
+  //     .string()
+  //     .required("password is required")
+  //     .min(8, "min 8 characters are required")
+  //     .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
+  //     .matches(/^(?=.*[A-Z])/, "Must contain at least one uppercase character")
+  //     .matches(/^(?=.*[0-9])/, "Must contain at least one number")
+  //     .matches(/^(?=.*[!@#%&])/, "Must contain at least one special character"),
+  //   confirmPassword: yup
+  //     .string()
+  //     .required("confirm password is required")
+  //     .oneOf([yup.ref("password")], "password must match")
+  //     .matches(/^(?=.*[a-z])/, "Must contain at least one lowercase character")
+  //     .matches(/^(?=.*[A-Z])/, "Must contain at least one uppercase character")
+  //     .matches(/^(?=.*[0-9])/, "Must contain at least one number")
+  //     .matches(/^(?=.*[!@#%&])/, "Must contain at least one special character"),
+  // });
   const { register, handleSubmit } = useForm({
     defaultValues: {
       name: "",

@@ -1,7 +1,6 @@
 import {
   Autocomplete,
   AutocompleteRenderInputParams,
-  Box,
   Button,
   Dialog,
   DialogActions,

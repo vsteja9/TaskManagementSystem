@@ -12,7 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
-import { ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import { ReactNode, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LocalContext, parmanentProject } from "../LocalContext";
 import {
@@ -33,7 +33,6 @@ export default function MuiNavBar({
     setOpenProjectDialog,
     setOpenUserDialog,
     setSelectedProject,
-    selectedProject,
   } = useContext(LocalContext);
   const [anchorElUser, setAnchorElUser] = useState(null);
 

@@ -8,22 +8,16 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "./Firebase";
+import { Link } from "react-router-dom";
 import { LocalContext } from "../LocalContext";
 import { CustomSnackBar } from "./Register";
-import { generateToken } from "../requests";
-import { STATUS_CODES } from "http";
 import { HttpStatusCode } from "axios";
 import { useGenerateToken } from "../requests/mutations";
-import Loader from "../pages/Loader";
+import Loader from "./Loader";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const { setIsBoardOpened } = useContext(LocalContext);
-  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const { snackBarMessage, setSnackBarMessage, snackBar, setSnackBar } =
     useContext(LocalContext);
